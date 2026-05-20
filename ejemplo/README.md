@@ -100,3 +100,56 @@ Para visualizarla como dispositivo móvil (ej.: smartphone), es recomendado acti
 
 * [Para Firefox](https://www-browserstack-com.translate.goog/guide/enable-responsive-design-mode-in-safari-and-firefox?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc).
 * [Para Chrome](https://developer.chrome.com/docs/devtools/device-mode).
+
+## Creando páginas para la app (Commit E01)
+
+Procedemos a crear una página "Login" para nuestra nueva app. Para eso:
+
+1. Posicionarse con la consola de comandos en la carpeta del proyecto
+
+```bash
+cd ejemplo
+```
+2. Ejecutar la creación de componentes para Ionic
+```bash
+ionic generate
+```
+3. Lo anterior mostrará diversas opciones para crear componentes en la app. Elegir la opción `page`:
+```bash
+? What would you like to generate? page
+```
+
+4. Seleccionar un nombre para la nueva página. Usar formato [CamelCase](https://es.wikipedia.org/wiki/Camel_case):
+```bash
+? Name/path of page: Login
+```
+
+Lo anterior ejecutará comandos que crearán la nueva página en el proyecto, terminando así:
+```bash
+[OK] Generated page!
+```
+
+5. Configurar la nueva página para que sea compatible con `NgModules`. Para eso, ir a la [carpeta login de la nueva página](/src/app/login/) y editar el archivo [login.page.ts](/src/app/login/login.page.ts), incorporando lo siguiente:
+
+```javascript
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+  standalone: false // <- Agregar esta línea!
+})
+```
+
+6. Ejecutar la app con ```ionic serve``` y revisar en tu navegador la página en http://localhost:8100/login. Con esto aparecerá una nueva página de tu app con encabezado "Login".
+
+7. Puedes probar modificaciones en tu nueva página modificando el archivo [login.page.html](/src/app/login/login.page.html). Por ejemplo, puedes modificar la cabecera por defecto de la siguiente forma:
+
+```html
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mi página de Login!</ion-title> <!-- Puedes modificar esta línea -->
+  </ion-toolbar>
+</ion-header>
+```
+
+Si tenías abierta la app en el terminal, puedes comprobar en http://localhost:8100/login que los cambios se reflejan automáticamente.
