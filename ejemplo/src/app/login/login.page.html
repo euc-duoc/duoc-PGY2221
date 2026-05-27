@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Mi página de Login!</ion-title>
-  </ion-toolbar>
+    <ion-title>
+      Mi página de Login!
+    </ion-title>
+  </ion-toolbar>  
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -10,4 +12,36 @@
       <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div id="container">
+    <ion-list>
+      <ion-item>
+        <ion-input 
+          labelPlacement="fixed" 
+          label="Usuario" 
+          placeholder="Ingresar nombre de usuario"
+          [(ngModel)]="user.usuario"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input 
+          labelPlacement="fixed" 
+          type="password" 
+          label="Contraseña" 
+          placeholder="Ingresar contraseña"
+          [(ngModel)]="user.password"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div style="text-align: right;">
+      <ion-button 
+        slot="end"
+        (click)="ingresar()"
+      >
+        Ingresar
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

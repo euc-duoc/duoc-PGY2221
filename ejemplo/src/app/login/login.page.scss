@@ -1,0 +1,8 @@
+#container {
+    padding: 10px;
+}
+
+ion-input .label-text-wrapper {
+  max-width: none; /* Prevents default truncation */
+  width: 200px;    /* Sets a specific width */
+}
