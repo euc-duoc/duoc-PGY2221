@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-home',
@@ -8,20 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: false,
 })
 export class HomePage {
-  data: any;
+  data: any = {};
 
   constructor(
-    private activeRoute: ActivatedRoute, 
+    private authService: AuthService,
     private router: Router
   ) {
-    this.activeRoute.queryParams.subscribe(params => {
-      if(this.router.currentNavigation()?.extras.state) {
-        this.data = this.router.currentNavigation()?.extras?.state?.['user'];
-        console.log(this.data);
-      }
-      else {
-        this.router.navigate(["/login"]);
-      }
-    });
+    this.data = authService.getUser();
   }
 }

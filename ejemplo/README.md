@@ -299,3 +299,5 @@ Para ajustar lo anterior, tenemos que hacer un pequeño cambio en [app-routing.m
     pathMatch: 'full'
   },
 ```
+
+## Creando una navegación simple (Commit E02)
