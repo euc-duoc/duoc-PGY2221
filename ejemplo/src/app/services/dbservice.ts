@@ -10,9 +10,8 @@ export class DBService {
   public database!: SQLiteObject;
 
   tablaUsuarios: string = "CREATE TABLE IF NOT EXISTS usuario(nombre TEXT PRIMARY KEY, password VARCHAR(4) NOT NULL);";
-  crearUsuario: string = "INSERT INTO usuario VALUES ('test', '1234');";
+  crearUsuario: string = "INSERT OR IGNORE INTO usuario VALUES ('test', '1234');";
 
-  usuarios = new BehaviorSubject<any[]>([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false); 
 
   constructor(
@@ -46,32 +45,25 @@ export class DBService {
       this.presentToast("Tabla Usuarios Creada");
       await this.database.executeSql(this.crearUsuario, []);
       this.presentToast("Usuario creado");
-      this.cargarUsuarios(); 
-      this.presentToast("Usuarios cargados");
       this.isDbReady.next(true); 
     } catch (e) { 
       this.presentToast("error creartabla " + e); 
     } 
   }
 
-  cargarUsuarios() { 
-    return this.database.executeSql('SELECT * FROM usuario', []).then(res => { 
-      let usuarios = []; 
-      if (res.rows.length > 0) { 
-        for (let i = 0; i < res.rows.length; i++) {
-          usuarios.push({ 
-            nombre: res.rows.item(i).nombre, 
-            titulo: res.rows.item(i).password
-          }); 
-        } 
-      }
+  async existeUsuario(nombre: string, pass: string) {
+    if(this.database != null) {
+      let res = await this.database.executeSql(
+        `SELECT * FROM usuario WHERE nombre = '${nombre}' AND password = '${pass}';`, []
+      );
 
-      this.usuarios.next(usuarios); 
-    }); 
-  } 
+      if (res.rows.length > 0)
+        return true;
+      else
+        return false;
+    }
 
-  getUsuarios() {
-    return this.usuarios.asObservable(); 
+    return false;
   }
 
   async presentToast(mensaje: string) { 

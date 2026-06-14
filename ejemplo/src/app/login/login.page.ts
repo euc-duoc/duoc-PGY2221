@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../services/storageservice';
 import { ToastController } from '@ionic/angular';
+import { DBService } from '../services/dbservice';
+
+// Para probar storage vs sqlite
+const PERSISTENCIA_USUARIOS: string = "sqlite";
 
 @Component({
   selector: 'app-login',
@@ -19,29 +23,28 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private storage: StorageService,
+    private dbService: DBService,
     public toastController: ToastController
   ) {}
 
   async ngOnInit() {
-    this.usuarios = await this.storage.get("usuarios");
-    console.log(this.usuarios);
+    if(PERSISTENCIA_USUARIOS != "sqlite")
+      this.usuarios = await this.storage.get("usuarios");
   }
 
-  ingresar() {
-    this.usuarios.forEach((u) => {
-      if(u.nombre == this.user.usuario && u.password == this.user.password) {
-        let navigationExtras: NavigationExtras = {
-          state: {
-            user: this.user
-          }
-        };
+  async ingresar() {
+    if(await this.dbService.existeUsuario(this.user.usuario, this.user.password)) {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          user: this.user
+        }
+      };
 
-        this.router.navigate(["/home"], navigationExtras);        
-        return;
-      }
-    })
-    
-    this.toast("Usuario no existe");
+      this.router.navigate(["/home"], navigationExtras);
+    }
+    else {
+      this.toast("Usuario no existe");
+    }
   }
 
   async toast(mensaje: string) { 
