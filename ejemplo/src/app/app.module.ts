@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular'
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
+import { provideHttpClient } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,7 +20,7 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
     AppRoutingModule,
     IonicStorageModule.forRoot()
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

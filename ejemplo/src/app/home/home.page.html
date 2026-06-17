@@ -15,5 +15,25 @@
 
   <div id="container">
     Bienvenido/a {{data.usuario}}!!
+    <br/><br/>
+
+    <p>Títulos de poemas aleatorios:</p>
+    <br/><br/>
+
+    <ion-list>
+      <ion-item *ngFor="let poema of poemas">
+        {{poema}}
+      </ion-item>
+    </ion-list>
+    <br/><br/>
+
+    <p>Tomar foto</p>
+    <img id="resultadoFoto"/>
+    <ion-button
+        slot="end"
+        (click)="tomarFoto()"
+      >
+        Tomar foto
+      </ion-button>
   </div>
 </ion-content>

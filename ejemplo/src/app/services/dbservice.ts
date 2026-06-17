@@ -28,14 +28,19 @@ export class DBService {
 
   crearBD() { 
     this.platform.ready().then(() => { 
-      this.sqlite.create({ 
-        name: 'usuarios.db', 
-        location: 'default'  
-      }).then((db: SQLiteObject) => { 
-        this.database = db; 
-        this.presentToast("BD Creada"); 
-        this.crearTablas(); 
-      }).catch(e => this.presentToast(e)); 
+      try {
+          this.sqlite.create({ 
+          name: 'usuarios.db', 
+          location: 'default'  
+        }).then((db: SQLiteObject) => { 
+          this.database = db; 
+          this.presentToast("BD Creada"); 
+          this.crearTablas(); 
+        }).catch(e => this.presentToast(e)); 
+      }
+      catch(e) {
+        this.presentToast("Servicio SQLite no disponible");
+      }      
     }) 
   }
 

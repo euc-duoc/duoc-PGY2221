@@ -38,9 +38,16 @@
     <div style="text-align: right;">
       <ion-button 
         slot="end"
-        (click)="ingresar()"
+        (click)="ingresarConSqlite()"
       >
-        Ingresar
+        Ingresar con SQlite
+      </ion-button>
+
+      <ion-button 
+        slot="end"
+        (click)="ingresarConStorage()"
+      >
+        Ingresar con Storage
       </ion-button>
     </div>
   </div>
