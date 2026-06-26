@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>API</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">API</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <h1>Datos COVID</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Muertes:</ion-col>
+      <ion-col>{{datosCovid.deaths}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Casos Por 1 Mill:</ion-col>
+      <ion-col>{{datosCovid.casesPerOneMillion}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Paises afectados:</ion-col>
+      <ion-col>{{datosCovid.affectedCountries}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Inicio
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Inicio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <strong>Hola {{sesion.usuario}}</strong>
+  </div>
+
+  <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="persistencia">
+          <ion-icon name="library"></ion-icon>
+          Persistencia
+        </ion-tab-button>
+        <ion-tab-button tab="api">
+          <ion-icon name="library"></ion-icon>
+          API
+        </ion-tab-button>
+        <ion-tab-button tab="camara">
+          <ion-icon name="library"></ion-icon>
+          Cámara
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+</ion-content>
