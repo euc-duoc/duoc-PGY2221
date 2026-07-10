@@ -55,6 +55,13 @@ export class DBService {
   }
   
   async existeUsuario(user: string, password: string) : Promise<boolean> {
+    if(!this.platform.is('cordova')) {
+      if(user != "user" || password != "1234")
+        return false;
+
+      return true;
+    }
+
     if(this.database != null) {
       let res = await this.database.executeSql(
         `SELECT user FROM usuario WHERE user=? AND password=?;`, [user, password]
